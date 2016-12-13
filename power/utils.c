@@ -201,16 +201,13 @@ int get_scaling_governor_check_cores(char governor[], int size,int core_num)
 void interaction(int duration, int num_args, int opt_list[])
 {
 #ifdef INTERACTION_BOOST
-    static int lock_handle = 0;
 
     if (duration < 0 || num_args < 1 || opt_list[0] == NULL)
         return;
 
     if (qcopt_handle) {
         if (perf_lock_acq) {
-            lock_handle = perf_lock_acq(lock_handle, duration, opt_list, num_args);
-            if (lock_handle == -1)
-                ALOGE("Failed to acquire lock.");
+            perf_lock_acq(0, duration, opt_list, num_args);
         }
     }
 #endif
@@ -224,9 +221,7 @@ int interaction_with_handle(int lock_handle, int duration, int num_args, int opt
 
     if (qcopt_handle) {
         if (perf_lock_acq) {
-            lock_handle = perf_lock_acq(lock_handle, duration, opt_list, num_args);
-            if (lock_handle == -1)
-                ALOGE("Failed to acquire lock.");
+            perf_lock_acq(0, duration, opt_list, num_args);
         }
     }
     return lock_handle;
@@ -246,10 +241,7 @@ void perform_hint_action(int hint_id, int resource_values[], int num_resources)
             /* Acquire an indefinite lock for the requested resources. */
             int lock_handle = perf_lock_acq(0, 0, resource_values,
                     num_resources);
-
-            if (lock_handle == -1) {
-                ALOGE("Failed to acquire lock.");
-            } else {
+            if (lock_handle != -1) {
                 /* Add this handle to our internal hint-list. */
                 struct hint_data *new_hint =
                     (struct hint_data *)malloc(sizeof(struct hint_data));
