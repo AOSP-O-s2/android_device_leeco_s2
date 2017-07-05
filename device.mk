@@ -259,6 +259,7 @@ PRODUCT_PACKAGES += \
 # Power
 PRODUCT_PACKAGES += \
     power.qcom
+    power.msm8952
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
