@@ -223,7 +223,7 @@ ro.sys.fw.trim_cache_percent=100
 ro.sys.fw.trim_enable_memory=2147483648
 
 # Optimal dex2oat threads for faster app installation
-ro.sys.fw.dex2oat_thread_count=4
+ro.sys.fw.dex2oat_thread_count=6
 
 # set cutoff voltage to 3200mV
 ro.cutoff_voltage_mv=3200
