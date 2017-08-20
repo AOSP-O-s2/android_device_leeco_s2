@@ -143,6 +143,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+	GoogleCamera \
     camera.msm8952 \
 	camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl
