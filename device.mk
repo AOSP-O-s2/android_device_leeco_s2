@@ -144,6 +144,8 @@ PRODUCT_COPY_FILES += \
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8952 \
+	camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl
 #    Snap
 
 # Charger
@@ -159,12 +161,31 @@ PRODUCT_PACKAGES += \
     gralloc.msm8952 \
     copybit.msm8952 \
     hwcomposer.msm8952 \
-    memtrack.msm8952
+    memtrack.msm8952 \
+	liboverlay \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.tv.cec@1.0-impl
+
+# new gatekeeper HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl
+
+# Keymaster HAL
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl
 
 # Display / OpenGLES
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610 \
     ro.sf.lcd_density=420
+
+# Default OMX service to non-Treble
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.media.treble_omx=false
 
 # Doze mode
 PRODUCT_PACKAGES += \
@@ -178,15 +199,21 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    fingerprint.msm8952
+	android.hardware.biometrics.fingerprint@2.1-service \
+    fingerprint.msm8952 \
 #    fingerprintd
 
 # IR
 PRODUCT_PACKAGES += \
+	android.hardware.ir@1.0-impl \
     consumerir.msm8952
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml
+
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
 
 # IRQ
 PRODUCT_COPY_FILES += \
@@ -209,7 +236,12 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.msm8952
+    lights.msm8952 \
+    android.hardware.light@2.0-impl
+
+# GNSS HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -237,19 +269,34 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libOmxAacEnc \
-    libOmxAmrEnc \
+#    libOmxAacEnc \
+#    libOmxAmrEnc \
     libOmxCore \
-    libOmxEvrcEnc \
-    libOmxQcelp13Enc \
-    libOmxSwVencMpeg4 \
-    libOmxSwVencHevc \
+#    libOmxEvrcEnc \
+#    libOmxQcelp13Enc \
+#    libOmxSwVencMpeg4 \
+#    libOmxSwVencHevc \
     libOmxVdec \
     libOmxVdecHevc \
-    libOmxVidcCommon \
+#    libOmxVidcCommon \
     libOmxVenc \
     libstagefrighthw \
     libstagefright_soft_flacdec
+
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.soundtrigger@2.0-impl
+
+# DRM
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
+
+# Bluetooth HAL
+PRODUCT_PACKAGES += \
+    libbt-vendor \
+    android.hardware.bluetooth@1.0-impl
 
 # IPA Manager
 PRODUCT_PACKAGES += \
@@ -269,11 +316,17 @@ PRODUCT_COPY_FILES += \
 # RIL
 PRODUCT_PACKAGES += \
 #    libcnefeatureconfig \
+	android.hardware.radio@1.0-impl \
     librmnetctl \
     libxml2 \
+	android.hardware.wifi@1.0-service \
     libqsap_sdk \
 #    telephony-ext \
     libminui
+
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
 
 #PRODUCT_BOOT_JARS += \
 #    telephony-ext
@@ -282,6 +335,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf \
     $(LOCAL_PATH)/sensors/hals.conf:system/etc/sensors/hals.conf
+
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl
+
+# USB HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl
 
 # Stlport
 PRODUCT_PACKAGES += \
