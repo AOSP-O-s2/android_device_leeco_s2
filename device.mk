@@ -258,8 +258,9 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.qcom
-    power.msm8952
+    power.qcom \
+    power.msm8952 \
+	android.hardware.power@1.0-impl
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
