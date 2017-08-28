@@ -268,7 +268,7 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    libcnefeatureconfig \
+#    libcnefeatureconfig \
     librmnetctl \
     libxml2 \
     libqsap_sdk \
