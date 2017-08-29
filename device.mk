@@ -300,8 +300,8 @@ PRODUCT_PACKAGES += \
 
 # IPA Manager
 PRODUCT_PACKAGES += \
-    ipacm \
-    IPACM_cfg.xml
+#    ipacm \
+#    IPACM_cfg.xml
 
 # Power
 PRODUCT_PACKAGES += \
