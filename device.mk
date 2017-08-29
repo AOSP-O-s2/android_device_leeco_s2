@@ -1,6 +1,7 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -143,15 +144,15 @@ PRODUCT_COPY_FILES += \
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8952 \
-    Snap
+#    Snap
 
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
 
 # CMActions
-PRODUCT_PACKAGES += \
-    CMActions
+#PRODUCT_PACKAGES += \
+#    CMActions
 
 # Display
 PRODUCT_PACKAGES += \
@@ -349,10 +350,10 @@ PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-ifeq ($(TARGET_BUILD_VARIANT),eng)
+#ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Disable ADB authentication
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
-endif
+#ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+#endif
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 

@@ -1,6 +1,7 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,7 +45,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := MSM8952
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
+BOARD_KERNEL_CMDLINE := console=tty0,ttyHSL0,115200,n8 androidboot.console=tty0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 ramoops_memreserve=4M earlyprintk androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -64,7 +65,7 @@ TARGET_COMPILE_WITH_MSM_KERNEL := true
 
 BOARD_DTBTOOL_ARGS := -2
 
-#ENABLE_CPUSETS := true
+ENABLE_CPUSETS := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -91,7 +92,7 @@ CM_POWERHAL_EXTENSION := qcom
 TARGET_POWERHAL_SET_INTERACTIVE_EXT := device/leeco/s2/power/power_ext.c
 
 # RIL
-BOARD_PROVIDES_LIBRIL := true
+BOARD_PROVIDES_LIBRIL := false
 TARGET_RIL_VARIANT := caf
 
 # Adreno
@@ -100,7 +101,7 @@ OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
-USE_CUSTOM_AUDIO_POLICY := 1
+#USE_CUSTOM_AUDIO_POLICY := 1
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
@@ -115,8 +116,11 @@ BLUETOOTH_HCI_USE_MCT := true
 QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 
+# Properties
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+
 # Camera
-USE_DEVICE_SPECIFIC_CAMERA := true
+USE_DEVICE_SPECIFIC_CAMERA := false
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 
 # This is needed for us as it disables tcache, which is breaking camera.
@@ -124,7 +128,7 @@ MALLOC_SVELTE := true
 BOARD_GLOBAL_CFLAGS += -DDECAY_TIME_DEFAULT=0
 
 # Charger
-WITH_CM_CHARGER := true
+#WITH_CM_CHARGER := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
@@ -135,7 +139,7 @@ BOARD_USES_QCNE := true
 TARGET_LDPRELOAD := libNimsWrap.so
 
 # Crypto
-TARGET_HW_DISK_ENCRYPTION := true
+TARGET_HW_DISK_ENCRYPTION := false
 
 # CSVT
 TARGET_USES_CSVT := true
@@ -152,8 +156,8 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
 # GPS
-USE_DEVICE_SPECIFIC_GPS := true
-USE_DEVICE_SPECIFIC_LOC_API := true
+USE_DEVICE_SPECIFIC_GPS := false
+USE_DEVICE_SPECIFIC_LOC_API := false
 TARGET_NO_RPC := true
 
 # Keymaster
@@ -186,16 +190,10 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 TARGET_USES_WCNSS_MAC_ADDR_REV := true
 
 # Cyanogen hardware
-BOARD_HARDWARE_CLASS += device/leeco/s2/cmhw
+#BOARD_HARDWARE_CLASS += device/leeco/s2/cmhw
 
-# Enable dexpreopt to speed boot time
-ifeq ($(HOST_OS),linux)
-  ifeq ($(call match-word-in-list,$(TARGET_BUILD_VARIANT),user),true)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-    endif
-  endif
-endif
+# Dex-preoptimization
+WITH_DEXPREOPT := false
 
 # Twrp
 #RECOVERY_VARIANT := twrp
@@ -214,7 +212,7 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_NTFS_3G := true
 #TWRP_EVENT_LOGGING := true
 else
-USE_CLANG_PLATFORM_BUILD := true
+#USE_CLANG_PLATFORM_BUILD := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.qcom
 endif
 
@@ -223,8 +221,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Sepolicy
-BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
-include device/qcom/sepolicy/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
+#include device/qcom/sepolicy/sepolicy.mk
 
 # OTA Assert
 TARGET_OTA_ASSERT_DEVICE := s2,le_s2,le_s2_ww
