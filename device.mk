@@ -160,7 +160,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gralloc.msm8952 \
     copybit.msm8952 \
-    hwcomposer.msm8952 \
+#    hwcomposer.msm8952 \
     memtrack.msm8952 \
 #	liboverlay \
     android.hardware.graphics.allocator@2.0-impl \
