@@ -117,7 +117,7 @@ QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 
 # Properties
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TARGET_SYSTEM_PROP += device/leeco/s2/system.prop
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := false
